@@ -1,0 +1,97 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+   {
+
+  int sizeofstack;
+
+   cin>>sizeofstack;   //to know the length of stack
+
+   int search;
+
+  cin>>search;        // to know what length the customer wants
+
+  vector <int> arr(sizeofstack);   //declaring a vector
+
+  int i,j,k,l;int max=0;int first[sizeofstack],second[sizeofstack];
+
+ for(i=0;i<sizeofstack;i++)       // taking input into the vector
+ {
+   cin>>arr[i];  
+   if(arr[i]>=max)
+     max=arr[i];
+ }
+  
+  
+ for(i=0;i<sizeofstack;i++)       // taking input into the vector
+ {
+   first[i]=arr[i];
+   second[i]=arr[i];
+ }
+  int size=arr.size();
+  for(j=size-1;j>=0;j--)  //executing first simulation 
+   {
+       if(first[j]>=search)
+           {
+             first[j]=first[j]-search;
+             break;
+           }  
+   }
+
+  cout<< "First simulation : "<<endl;
+  for(j=0;j<size;j++)  //displaying first simulation 
+   {
+       cout<<first[j]<<" ";
+   }
+  
+  
+  vector <int> index(size);
+  int minmax=max;int count=0;
+  for(k=0;k<size;k++)
+  {
+      if(arr[k]>=search && arr[k]<=minmax)  //maintaining index vector
+      {
+          minmax=arr[k];
+          index[count++]=k;
+          
+      }
+  }
+  cout<<endl;
+  
+  second[index[count-1]]=second[index[count-1]]-search;
+  
+  cout<< "Second simulation : "<<endl;
+  for(j=0;j<size;j++)  //displaying second simulation 
+   {
+       cout<<second[j]<<" ";
+   }
+   
+   cout<<endl;
+   
+   vector <int> index2(size);
+  int count1=0;
+  for(k=0;k<size;k++)
+  {
+      if(arr[k]>=search && arr[k]>=minmax)  //maintaining index2 vector
+      {
+          minmax=arr[k];
+          index2[count1++]=k;
+          
+      }
+  }
+  
+  int size3=index2.size();
+  
+  arr[index2[count1-1]]=arr[index2[count1-1]]-search;
+  
+  cout<< "Third simulation : "<<endl;
+  for(j=0;j<size;j++)               //displaying third simulation 
+   {
+       cout<<arr[j]<<" ";
+   }
+   
+  
+return 0;
+}
